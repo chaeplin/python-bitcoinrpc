@@ -118,7 +118,8 @@ class AuthServiceProxy(object):
             raise AttributeError
         if self.__service_name is not None:
             name = "%s.%s" % (self.__service_name, name)
-        return AuthServiceProxy(self.__service_url, name, self.__timeout, self.__conn)
+        # no-reuse at all
+        return AuthServiceProxy(self.__service_url, name, self.__timeout, None)
 
     def __call__(self, *args):
         AuthServiceProxy.__id_count += 1
